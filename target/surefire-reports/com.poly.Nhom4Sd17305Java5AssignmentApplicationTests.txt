@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.poly.Nhom4Sd17305Java5AssignmentApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.399 s - in com.poly.Nhom4Sd17305Java5AssignmentApplicationTests
