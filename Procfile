@@ -1,1 +1,1 @@
-web: java $JAVA_TOOL_OPTIONS -war target/Nhom4_SD17305_Java5_Assignment.war --spring.profiles.active=heroku
+web: java $JAVA_TOOL_OPTIONS -war target/Nhom4_SD17305_Java5_Assignment-0.0.1-SNAPSHOT.war --spring.profiles.active=heroku
