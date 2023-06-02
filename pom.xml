@@ -11,7 +11,7 @@
 	<groupId>com.poly</groupId>
 	<artifactId>Nhom4_SD17305_Java5_Assignment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>Nhom4_SD17305_Java5_Assignment</name>
 	<description>Project for Spring Boot Assignment Java 5</description>
 	<properties>
