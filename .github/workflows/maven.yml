@@ -1,4 +1,4 @@
-name: Nhom 4 Assignment Java 5
+name: Java CI
 
 on: [push]
 
