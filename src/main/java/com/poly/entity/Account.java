@@ -1,5 +1,5 @@
 package com.poly.entity;
 
-public class datxinhgai {
+public class Account {
 
 }
