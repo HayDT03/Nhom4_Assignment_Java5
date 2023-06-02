@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar
+web: java $JAVA_TOOL_OPTIONS -war target/Nhom4_SD17305_Java5_Assignment.war --spring.profiles.active=heroku
