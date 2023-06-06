@@ -9,6 +9,6 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("message", "Chào mừng bạn đến với website");
-		return "user/home";
+		return "user/contact";
 	}
 }
