@@ -1,0 +1,62 @@
+@charset "UTF-8";
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: white;
+}
+
+.navbar {
+	background: black !important;
+	backdrop-filter: blur(10px) saturate(125%);
+	-webkit-backdrop-filter: blur(10px) saturate(125%);
+	color: white !important;
+}
+
+.mg p>a {
+	text-decoration: none;
+	color: rgb(226, 226, 226);
+}
+
+.mg a:hover {
+	color: aqua
+}
+
+ul>a {
+	text-decoration: none;
+}
+
+ul>a>li:hover {
+	background-color: rgb(228, 248, 248);
+}
+
+.wrapper {
+	text-align: center;
+}
+
+.a {
+	position: absolute;
+	top: 50%;
+}
+
+.menu a {
+	color: white;
+	margin-left: 20px;
+}
+
+.menu ul>li>a {
+	color: white;
+}
+
+.menu .dropdown li a {
+	color: black;
+	margin-left: 0px;
+}
+
+.left-button {
+	float: right;
+}
+
+ul>li>a{
+    text-decoration: none;
+    color: black;
+}
