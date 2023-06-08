@@ -16,7 +16,7 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("mainView", "home.jsp");
-		model.addAttribute("listProduct", pdao.findSixRandomProducts());
+		model.addAttribute("listProduct", pdao.findRandomProducts());
 		return "user/layout";
 	}
 	
