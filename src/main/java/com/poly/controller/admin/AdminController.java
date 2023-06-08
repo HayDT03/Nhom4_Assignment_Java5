@@ -20,10 +20,10 @@ public class AdminController {
 	@Autowired
 	ProductDAO dao;
 	
-	@GetMapping("/admin/index")
+	@GetMapping("/admin")
 	public String admin(Model model) {
 		List<Product> list = dao.findAll();
-		String link = "manage/product";
+		String link = "statistic/indextemp";
 		model.addAttribute("list", list);
 		model.addAttribute("url", link);
 		return "admin/index";
