@@ -13,7 +13,10 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
-	<jsp:include page="${mainView}"></jsp:include>
+	<div class="mt-5">
+		<jsp:include page="${mainView}"></jsp:include>
+	</div>
+	
 	<jsp:include page="footer.jsp"></jsp:include>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
