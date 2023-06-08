@@ -41,11 +41,6 @@ public class Product implements Serializable{
 	@Column(name = "[LIKE]")
 	Integer like;
 	String author;
-<<<<<<< HEAD
-=======
-	
-	
->>>>>>> AdminPage
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")

@@ -14,7 +14,7 @@
                         <a class="nav-link active" aria-current="page" href="/about">Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/all_product">Sách</a>
+                        <a class="nav-link" href="/allproduct">Sách</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Liên hệ</a>
