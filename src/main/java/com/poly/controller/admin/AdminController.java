@@ -9,7 +9,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.ProductDAO;
@@ -30,21 +29,21 @@ public class AdminController {
 		return "admin/index";
 	}
 	
-	@RequestMapping("/admin/quanly/sanpham")
+	@GetMapping("/admin/quanly/sanpham")
 	public String sanpham(Model model) {
 		String link = "quanly/sanpham";
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@RequestMapping("/admin/quanly/nguoidung")
+	@GetMapping("/admin/quanly/nguoidung")
 	public String nguoidung(Model model) {
 		String link = "quanly/nguoidung";
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@RequestMapping("/admin/quanly/giohang")
+	@GetMapping("/admin/quanly/giohang")
 	public String giohang(Model model) {
 		String link = "quanly/giohang";
 		model.addAttribute("url", link);
