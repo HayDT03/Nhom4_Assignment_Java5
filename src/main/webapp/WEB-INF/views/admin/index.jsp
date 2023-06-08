@@ -18,9 +18,7 @@
 	<footer>
 		<jsp:include page="layout/footer.jsp"></jsp:include>
 	</footer>
-
-	<script src="/js/jqueryadmin.min.js"></script>
-	<script src="/js/bootstrapadmin.min.js"></script>
+	<jsp:include page="layout/script.jsp"></jsp:include>
 </body>
 
 </html>
