@@ -38,7 +38,7 @@ public class Product implements Serializable{
 	String description;
 	String image;
 	Integer like;
-	Double author;
+	String author;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
