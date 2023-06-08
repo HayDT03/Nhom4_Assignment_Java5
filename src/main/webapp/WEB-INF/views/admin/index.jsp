@@ -9,7 +9,7 @@
 <jsp:include page="layout/head.jsp"></jsp:include>
 </head>
 <body>
-	<header></header>
+	<jsp:include page="layout/header.jsp"></jsp:include>
 	<jsp:include page="layout/nav.jsp"></jsp:include>
 
 	<article class="container-fluid">

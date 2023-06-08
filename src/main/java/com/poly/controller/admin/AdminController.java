@@ -22,8 +22,7 @@ public class AdminController {
 	ProductDAO dao;
 	
 	@GetMapping("admin/index")
-	public String admin(Model model, @RequestParam("field") Optional<String> field) {
-		Sort sort = Sort.by(Direction.DESC, field.orElse("id"));
+	public String admin(Model model) {
 		List<Product> list = dao.findAll();
 		String link = "quanly/sanpham";
 		model.addAttribute("list", list);
