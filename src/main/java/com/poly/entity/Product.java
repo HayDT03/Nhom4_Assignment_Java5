@@ -3,6 +3,7 @@ package com.poly.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +38,14 @@ public class Product implements Serializable{
 	Integer quantity;
 	String description;
 	String image;
+	@Column(name = "[LIKE]")
 	Integer like;
 	String author;
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> AdminPage
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
