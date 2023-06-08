@@ -23,13 +23,13 @@ public class AdminController {
 	@GetMapping("admin/index")
 	public String admin(Model model) {
 		List<Product> list = dao.findAll();
-		String link = "quanly/sanpham";
+		String link = "manage/product";
 		model.addAttribute("list", list);
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@GetMapping("/admin/quanly/sanpham")
+	@GetMapping("/admin/manage/product")
 	public String sanpham(Model model) {
 		String link = "quanly/sanpham";
 		model.addAttribute("url", link);
