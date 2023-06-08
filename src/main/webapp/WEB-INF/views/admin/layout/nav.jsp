@@ -20,14 +20,13 @@
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Danh mục quản lý </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="/admin/quanly/sanpham">Quản lý
-						sản phẩm</a> <a class="dropdown-item" href="/admin/quanly/nguoidung">Quản
-						lý người dùng</a> <a class="dropdown-item"
-						href="/admin/quanly/thanhtoan">Quản lý thanh toán</a> <a
-						class="dropdown-item" href="/admin/quanly/hoadon">Quản lý
-						hóa đơn</a> <a class="dropdown-item" href="/admin/quanly/giohang">Quản
-						lý giỏ hàng</a>
-				</div></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="dropdown-item" href="/admin/quanly/sanpham">Quản lý sản phẩm</a>
+                            <a class="dropdown-item" href="#"></a>
+                            <a class="dropdown-item" href="/admin/quanly/nguoidung">Quản lý người dùng</a>
+                            <a class="dropdown-item" href="#"></a>
+                            <a class="dropdown-item" href="/admin/quanly/hoadon">Quản lý hóa đơn</a>
+				</div>
+				</li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<li class="nav-item dropdown active"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
