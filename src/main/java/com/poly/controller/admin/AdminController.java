@@ -21,7 +21,7 @@ public class AdminController {
 	@Autowired
 	ProductDAO dao;
 	
-	@GetMapping("admin/index")
+	@GetMapping("/admin/index")
 	public String admin(Model model) {
 		List<Product> list = dao.findAll();
 		String link = "quanly/sanpham";
