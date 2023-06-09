@@ -24,4 +24,7 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 	
 	@Query("UPDATE Product p SET p.quantity = 0 WHERE p.id =?1")
 	Object entity(Product id);
+	
+	@Query("SELECT p FROM Product p WHERE p.name LIKE ?1")
+	Page<Product> findByNamePage(String name, Pageable pageable);
 }

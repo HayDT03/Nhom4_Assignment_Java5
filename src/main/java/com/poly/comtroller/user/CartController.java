@@ -101,8 +101,6 @@ public class CartController {
 		}else {
 			cdao.delete(entity);
 		}
-		
-		
 		return "redirect:/cart";
 	}
 	@GetMapping("/cart/delete/{id}")
