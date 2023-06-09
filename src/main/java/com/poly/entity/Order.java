@@ -44,7 +44,7 @@ public class Order implements Serializable{
 	@Column(name = "DateCreate")
 	Date createDate = new Date();
 	
-	Boolean status;
+	Integer status;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
