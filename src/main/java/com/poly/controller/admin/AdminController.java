@@ -3,49 +3,74 @@ package com.poly.controller.admin;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.ProductDAO;
+import com.poly.dao.UserDAO;
 import com.poly.entity.Product;
+import com.poly.entity.User;
 
 @Controller
 public class AdminController {
 
 	@Autowired
-	ProductDAO dao;
+	ServletContext app;
+	
+	@Autowired
+	ProductDAO pdao;
+	
+	@Autowired
+	UserDAO udao;
 	
 	@GetMapping("/admin")
 	public String admin(Model model) {
-		List<Product> list = dao.findAll();
 		String link = "statistic/indextemp";
-		model.addAttribute("list", list);
+		model.addAttribute("tittle", "Trang chủ");
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
 	@GetMapping("/admin/manage/product")
-	public String sanpham(Model model) {
-		String link = "quanly/sanpham";
+	public String sanpham(Model model, @RequestParam("p") Optional<Integer> p) {
+		Pageable pageable;
+		try {
+			pageable = PageRequest.of(p.orElse(0), 5);
+		} catch (Exception e) {
+			pageable = PageRequest.of(0, 5);
+		}
+		Page<Product> page = pdao.findAll(pageable);
+		model.addAttribute("list", page);
+		Product entity = new Product();
+		String link = "manage/product";
+		model.addAttribute("tittle", "Trang quản lý sản phẩm");
+		model.addAttribute("product", entity);
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@GetMapping("/admin/quanly/nguoidung")
+	
+	@GetMapping("/admin/manage/user")
 	public String nguoidung(Model model) {
-		String link = "quanly/nguoidung";
+		List<User> list = udao.findAll();
+		String link = "manage/user";
+		model.addAttribute("tittle", "Trang quản lý người dùng");
+		model.addAttribute("list", list);
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@GetMapping("/admin/quanly/giohang")
+	@GetMapping("/admin/manage/cart")
 	public String giohang(Model model) {
-		String link = "quanly/giohang";
+		String link = "manage/cart";
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
