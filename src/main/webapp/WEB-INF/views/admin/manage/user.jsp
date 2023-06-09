@@ -23,7 +23,7 @@
 		</div>
 		<div class="form-group">
 			<label>Email:</label>
-			<form:input type="password" class="form-control" path="email" />
+			<form:input type="email" class="form-control" path="email" />
 		</div>
 		<div class="form-group">
 			<label>Giới tính:</label>
@@ -42,7 +42,7 @@
 		</div>
 		<div class="form-group">
 			<label>Ngày sinh:</label>
-			<fmt:formatDate value="${user.birthday}" pattern="dd-MM-yyyy" />
+			<fmt:formatDate var="birthday" value="${user.birthday}" pattern="dd-MM-yyyy" />
 			<form:input type="date" class="form-control" path="birthday"/>
 		</div>
 		<div class="form-group">
