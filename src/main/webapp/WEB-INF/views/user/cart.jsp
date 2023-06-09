@@ -1,61 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<br><br>
-    <main>
-        <div class="container mt-4">
-            <h1 class="text-center">GIỎ HÀNG</h1>
-            <hr>
-            <!-- San pham MỚI -->
-            <div class="card">
-                <div class="card-body">
-                    <table class="table table-bordered text-center"
-                        style="vertical-align: middle;border-color: inherit;">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Ảnh sản phẩm</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Đơn giá</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Tổng giá</th>
-                                <th scope="col">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td><img src="hinh.jpg" alt="" width="120px" height="120px"></td>
-                                <td>TokuDA</td>
-                                <td>1900000</td>
-                                <td>1</td>
-                                <td>1900000</td>
-                                <td><a href="#" style="text-decoration: none; color: red;"><i
-                                            class="bi bi-trash3-fill"></i> Xóa</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td><img src="hinh.jpg" alt="" width="120px" height="120px"></td>
-                                <td>TokuDA</td>
-                                <td>1900000</td>
-                                <td>1</td>
-                                <td>1900000</td>
-                                <td><a href="#" style="text-decoration: none; color: red;"><i
-                                            class="bi bi-trash3-fill"></i> Xóa</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="col-12 row">
-                        <div class="col-6">
-                            <h5>Tổng tiền: </h5>
-                        </div>
-                        <div class="col-6">
-                            <a href="/pay" class="btn btn-danger left-button">Thanh toán</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <br><br>
-    </main>
-    <br>
-    <br>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<main class="mt-5 p-5 min-vh-100">
+	<div class="container mt-4">
+		<h1 class="text-center">GIỎ HÀNG</h1>
+		<!-- San pham MỚI -->
+		<c:if test="${not empty message}">
+			<h3 class="my-5 text-center">${message}</h3>
+		</c:if>
+		<c:set var="total" value="0"></c:set>
+		<c:forEach var="item" items="${listCart}">
+			<div class="card rounded-3 mb-4 mt-4">
+				<div class="card-body p-4">
+					<div class="row d-flex justify-content-between align-items-center">
+						<div class="col-md-2 col-lg-2 col-xl-2">
+							<img
+								src="/image/${item.product.image}"
+								class="img-fluid rounded-3" alt="Cotton T-shirt">
+						</div>
+						<div class="col-md-3 col-lg-3 col-xl-3">
+							<p class="lead fw-normal mb-2">${item.product.name}</p>
+							<p>
+								<span class="text-muted">Tác giả: </span> ${item.product.author}
+						</div>
+						<div class="col-md-3 col-lg-3 col-xl-2">
+							<form action="/cart/setquantity/${item.id}">
+								<div class="d-flex">
+									<button class="btn btn-link px-2" formaction="/cart/increase/${item.id}">
+										<i class="bi bi-dash" ></i>
+									</button>
+									<input id="form1" min="0" name="quantity" value="${item.quantityPurchased}"
+										class="form-control form-control-sm"
+										style="width: 70px; text-align: center;" onblur="this.form.submit()">
+		
+									<button class="btn btn-link px-2" formaction="/cart/reduced/${item.id}">
+										<i class="bi bi-plus"></i>
+									</button>
+								</div>
+								
+							</form>
+							
+						</div>
+						<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+							<h5 class="mb-0"> <fmt:formatNumber value="${item.product.price}" type="number" pattern="0" /> VND</h5>
+						</div>
+						<div class="col-md-1 col-lg-1 col-xl-1 ">
+							<a href="/cart/delete/${item.id}" class="text-danger alert-heading"><i
+								class="bi bi-trash-fill" style="font-size: 23px;"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<c:set var="total" value="${total + (item.product.price * item.quantityPurchased)}"></c:set>
+		</c:forEach>
+		
+		<c:if test="${not empty listCart}">
+			<div class="col-12 row">
+				<div class="col-6">
+					<h5>Tổng tiền: <fmt:formatNumber value="${total}" type="number" pattern="0" /> VND </h5>
+				</div>
+				<div class="col-6">
+					<a href="#" class="btn btn-danger left-button">Thanh toán</a>
+				</div>
+			</div>
+		</c:if>
+		
+	</div>
+</main>

@@ -16,7 +16,7 @@ public class MainController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("mainView", "home.jsp");
-		model.addAttribute("listProduct", pdao.findAll());
+		model.addAttribute("listProduct", pdao.findRandomProducts());
 		return "user/layout";
 	}
 	
@@ -26,11 +26,6 @@ public class MainController {
 		return "user/layout";
 	}
 	
-	@GetMapping("/cart")
-	public String cart(Model model) {
-		model.addAttribute("mainView", "cart.jsp");
-		return "user/layout";
-	}
 	
 	@GetMapping("/pay")
 	public String pay(Model model) {
