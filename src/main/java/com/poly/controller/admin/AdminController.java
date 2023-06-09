@@ -61,17 +61,19 @@ public class AdminController {
 	@GetMapping("/admin/manage/user")
 	public String nguoidung(Model model) {
 		List<User> list = udao.findAll();
+		User entity = new User();
 		String link = "manage/user";
 		model.addAttribute("tittle", "Trang quản lý người dùng");
 		model.addAttribute("list", list);
+		model.addAttribute("user", entity);
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
 	
-	@GetMapping("/admin/manage/cart")
-	public String giohang(Model model) {
-		String link = "manage/cart";
-		model.addAttribute("url", link);
-		return "admin/index";
-	}
+//	@GetMapping("/admin/manage/cart")
+//	public String giohang(Model model) {
+//		String link = "manage/cart";
+//		model.addAttribute("url", link);
+//		return "admin/index";
+//	}
 }

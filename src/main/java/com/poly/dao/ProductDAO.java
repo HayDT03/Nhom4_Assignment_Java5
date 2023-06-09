@@ -2,6 +2,8 @@ package com.poly.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,10 +15,12 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 
 	@Query(value = "SELECT TOP 8 * FROM Products ORDER BY NEWID()", nativeQuery = true)
     List<Product> findRandomProducts();
-
-
+	
 	@Query("SELECT p FROM Product p WHERE p.quantity > 0")
 	List<Product> findAll();
+	
+	@Query("SELECT p FROM Product p WHERE p.quantity > 0")
+	Page<Product> findAll(Pageable pageable);
 	
 	@Query("UPDATE Product p SET p.quantity = 0 WHERE p.id =?1")
 	Object entity(Product id);
