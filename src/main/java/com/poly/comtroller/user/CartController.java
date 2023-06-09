@@ -86,7 +86,7 @@ public class CartController {
 	@GetMapping("/cart/reduced/{id}")
 	public String reduced(@PathVariable("id") Long cartID) {
 		Cart entity = cdao.getById(cartID);
-		entity.setQuantityPurchased(entity.getQuantityPurchased() + 1);
+		entity.setQuantityPurchased(entity.getQuantityPurchased() - 1);
 		cdao.saveAndFlush(entity);
 		
 		return "redirect:/cart";

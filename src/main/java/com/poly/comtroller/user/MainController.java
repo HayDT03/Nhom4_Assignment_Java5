@@ -46,8 +46,14 @@ public class MainController {
 	}
 	
 	@GetMapping("/allproduct")
-	public String all_product(Model model) {
+	public String allproduct(Model model) {
 		model.addAttribute("mainView", "all_product.jsp");
+		return "user/layout";
+	}
+	
+	@GetMapping("/detail")
+	public String detail(Model model) {
+		model.addAttribute("mainView", "detail.jsp");
 		return "user/layout";
 	}
 }

@@ -27,14 +27,14 @@
 						<div class="col-md-3 col-lg-3 col-xl-2">
 							<form action="/cart/setquantity/${item.id}">
 								<div class="d-flex">
-									<button class="btn btn-link px-2" formaction="/cart/increase/${item.id}">
+									<button class="btn btn-link px-2" formaction="/cart/reduced/${item.id}">
 										<i class="bi bi-dash" ></i>
 									</button>
 									<input id="form1" min="0" name="quantity" value="${item.quantityPurchased}"
 										class="form-control form-control-sm"
-										style="width: 70px; text-align: center;" onblur="this.form.submit()">
+										style="width: 70px; text-align: center;" onblur="this.form.submit()" type="number">
 		
-									<button class="btn btn-link px-2" formaction="/cart/reduced/${item.id}">
+									<button class="btn btn-link px-2" formaction="/cart/increase/${item.id}">
 										<i class="bi bi-plus"></i>
 									</button>
 								</div>
