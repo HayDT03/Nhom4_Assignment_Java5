@@ -42,10 +42,10 @@
 		</div>
 		<div class="form-group">
 			<label>Ngày sinh:</label>
+			
+			<form:input type="date" class="form-control" path="birthday"
 			<fmt:formatDate value="${user.birthday }"
-								pattern="dd-MM-yyyy">
-			<form:input type="date" class="form-control" path="birthday"/>
-			</fmt:formatDate>
+								pattern="dd-MM-yyyy" />/>
 		</div>
 		<div class="form-group">
 			<label>Số điện thoại:</label>
