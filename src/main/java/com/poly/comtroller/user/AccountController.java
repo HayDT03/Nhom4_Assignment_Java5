@@ -54,9 +54,6 @@ public class AccountController {
 				break;
 			}
 		}
-		
-		
-		
 		if(!(user == null)) {
 			if (password.equals(user.getPassword())) {
 				sessionService.setAttribute("username", user.getId());
