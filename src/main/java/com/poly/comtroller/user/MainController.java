@@ -26,11 +26,6 @@ public class MainController {
 		return "user/layout";
 	}
 	
-	@GetMapping("/cart")
-	public String cart(Model model) {
-		model.addAttribute("mainView", "cart.jsp");
-		return "user/layout";
-	}
 	
 	@GetMapping("/pay")
 	public String pay(Model model) {

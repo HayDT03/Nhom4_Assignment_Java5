@@ -7,10 +7,11 @@
 <title>Đăng ký</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link rel="stylesheet" href="/css/form.css">
 </head>
 <body>
-  <div class="vh-300 d-flex justify-content-center align-items-center">
-        <div class="container">
+  <div class="vh-300 d-flex justify-content-center align-items-center mt-4">
+        <div class="container form-group">
             <div class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="border border-3 border-success"></div>
