@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Favories")
+@Table(name = "Favorites")
 public class Favorite implements Serializable{
 	/**
 	 * 
