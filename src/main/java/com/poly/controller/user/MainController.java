@@ -49,9 +49,9 @@ public class MainController {
 		return "user/layout";
 	}
 	
-	@GetMapping("/favourite")
+	@GetMapping("/favorite")
 	public String favourite(Model model) {
-		model.addAttribute("mainView", "favourite.jsp");
+		model.addAttribute("mainView", "favorite.jsp");
 		return "user/layout";
 	}
 	

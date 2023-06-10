@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.Query;
 import com.poly.entity.User;
 
 public interface  UserDAO extends JpaRepository<User, String> {
-
+	
 }
