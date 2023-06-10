@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.dao.OrderDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.UserDAO;
+import com.poly.entity.Order;
 import com.poly.entity.Product;
 import com.poly.entity.User;
 
@@ -24,13 +26,13 @@ public class AdminController {
 
 	@Autowired
 	ServletContext app;
-	
+
 	@Autowired
 	ProductDAO pdao;
-	
+
 	@Autowired
 	UserDAO udao;
-	
+
 	@GetMapping("/admin")
 	public String admin(Model model) {
 		String link = "statistic/indextemp";
@@ -38,7 +40,7 @@ public class AdminController {
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
-	
+
 	@GetMapping("/admin/manage/product")
 	public String sanpham(Model model, @RequestParam("p") Optional<Integer> p) {
 		Pageable pageable;
@@ -56,8 +58,7 @@ public class AdminController {
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
-	
-	
+
 	@GetMapping("/admin/manage/user")
 	public String nguoidung(Model model) {
 		List<User> list = udao.findAll();
@@ -69,11 +70,20 @@ public class AdminController {
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
-	
-//	@GetMapping("/admin/manage/cart")
-//	public String giohang(Model model) {
-//		String link = "manage/cart";
-//		model.addAttribute("url", link);
-//		return "admin/index";
-//	}
+
+	@Autowired
+	OrderDAO odao;
+
+	@GetMapping("/admin/manage/bill")
+	public String bill(Model model) {
+		
+		List<Order> page = odao.findAll();
+		model.addAttribute("list", page);
+		Product entity = new Product();
+		String link = "manage/bill";
+		model.addAttribute("tittle", "Trang quản lý sản phẩm");
+		model.addAttribute("product", entity);
+		model.addAttribute("url", link);
+		return "admin/index";
+	}
 }

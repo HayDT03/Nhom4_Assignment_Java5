@@ -1,4 +1,4 @@
-package com.poly.comtroller.user;
+package com.poly.controller.user;
 
 import java.util.List;
 
@@ -101,8 +101,6 @@ public class CartController {
 		}else {
 			cdao.delete(entity);
 		}
-		
-		
 		return "redirect:/cart";
 	}
 	@GetMapping("/cart/delete/{id}")

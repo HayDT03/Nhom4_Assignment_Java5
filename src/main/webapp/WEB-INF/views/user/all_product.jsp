@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
   <br>
   <br>
   <main>
     <div class="container-fluid">
       <h1 class="text-center">Welcome to the Bookstore</h1>
       <div class="row">
+      
         <!-- Danh muc san pham -->
         <div class="col-lg-2">
           <div class="card">
@@ -28,117 +31,28 @@
             <div class="card-body">
               <div class="row">
                 <!-- San pham 1 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 2 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 3 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 4 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 5 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 6 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 7 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- San pham 8 -->
-                <div class="col-md-3 mb-3">
-                  <div class="card">
-                    <img src="hinh.jpg" class="card-img-top" alt="Book 1" height="300px">
-                    <div class="card-body">
-                      <h5 class="card-title">Book 1</h5>
-                      <p class="card-text">Tác giả: Xuân Quỳnh</p>
-                      <p class="card-text">Giá: 1,459,000₫ </p>
-                      <div class="wrapper">
-                        <a class="btn btn-outline-primary"><i class="bi bi-cart"></i> Thêm giỏ hàng</a>         
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <c:forEach var="item" items="${page.content}">
+				<c:set var="i" value="1"></c:set>
+				<div class="col-md-3 mb-4">
+					<div class="card">
+						<img src="/image/${item.image}" class="card-img-top" alt="Book"
+							height="300px">
+						<div class="card-body">
+							<h5 class="card-title" style="min-height: 2.5em;">${item.name}</h5>
+							<p class="card-text">Tác giả: ${item.author}</p>
+							<p class="card-text">Giá: <fmt:formatNumber value="${item.price}" type="number" pattern="0" /> VND</p>
+							<form action="/cart/add">
+								<button type="submit" formaction="/cart/add/${item.id}" class="btn btn-outline-primary col-12">
+									<i class="bi bi-cart"></i> Thêm giỏ hàng
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- -------------- -->
+				<c:set var="i" value="${i + 1}" />
+	
+		</c:forEach>
                 <!-- <!=========================> -->
               </div>
             </div>

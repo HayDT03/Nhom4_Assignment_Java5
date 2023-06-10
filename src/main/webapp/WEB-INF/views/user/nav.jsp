@@ -23,8 +23,8 @@
                     
                     
                 </ul>
-                <form class="d-flex mx-auto" role="search" style="width: 35%">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form action="/allproduct" method="post" class="d-flex mx-auto" role="search" style="width: 35%">
+                    <input name="keyword" value="${param.keyword}" class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success ms-2" style="width: 35%" type="submit">Tìm kiếm</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
