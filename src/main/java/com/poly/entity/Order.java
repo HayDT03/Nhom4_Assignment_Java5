@@ -42,7 +42,6 @@ public class Order implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DateCreate")
-	Date createDate = new Date();
 	
 	Integer status;
 	
