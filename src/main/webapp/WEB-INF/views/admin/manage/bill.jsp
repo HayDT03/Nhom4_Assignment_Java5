@@ -74,19 +74,20 @@
 					<th>Ngày lập</th>
 					<th>Trạng thái</th>
 					<th></th>
-					<th>Thông tin</th>
 				</tr>
 			</thead>
 			<tbody class="bg-light">
-				<c:forEach var="item" items="${list }">
+				<c:forEach var="item" items="${list}">
 					<tr>
-						<td>${item.id }</td>
-						<td>${item.user }</td>
-						<td>${item.total }</td>
-						<td>${item.date_create }</td>
+						<td>${item.id}</td>
+						<td>${item.user.id}</td>
+						<td>${item.total}</td>
+						<td>${item.date}</td>
 						<td>${item.status }</td>
-						<td><a href="/admin/manage/bill/${list.id}">Sửa</a>|<a href="/admin/manage/bill/remove/${list.id}">Xóa/a></td>
-						<td><a href="#" class="btn btn-info">Chi tiết</a></td>
+						<td>
+							<a href="/admin/manage/bill/${item.id}">Sửa</a>|
+							<a href="/admin/manage/bill/remove/${item.id}">Xóa</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

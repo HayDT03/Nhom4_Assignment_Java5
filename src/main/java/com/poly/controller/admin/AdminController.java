@@ -42,7 +42,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/manage/product")
-	public String sanpham(Model model, @RequestParam("p") Optional<Integer> p) {
+	public String product(Model model, @RequestParam("p") Optional<Integer> p) {
 		Pageable pageable;
 		try {
 			pageable = PageRequest.of(p.orElse(0), 5);
@@ -60,7 +60,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/manage/user")
-	public String nguoidung(Model model) {
+	public String user(Model model) {
 		List<User> list = udao.findAll();
 		User entity = new User();
 		String link = "manage/user";
@@ -79,9 +79,9 @@ public class AdminController {
 		
 		List<Order> page = odao.findAll();
 		model.addAttribute("list", page);
-		Product entity = new Product();
+		Order entity = new Order();
 		String link = "manage/bill";
-		model.addAttribute("tittle", "Trang quản lý sản phẩm");
+		model.addAttribute("tittle", "Trang quản lý hoá đơn");
 		model.addAttribute("product", entity);
 		model.addAttribute("url", link);
 		return "admin/index";

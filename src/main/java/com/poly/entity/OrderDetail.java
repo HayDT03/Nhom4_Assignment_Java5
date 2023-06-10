@@ -43,5 +43,5 @@ public class OrderDetail implements Serializable{
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DateCreate")
-	Date createDate = new Date();
+	Date date = new Date();
 }
