@@ -17,7 +17,7 @@
                     </li>
                     <c:if test="${not empty sessionScope.fullname}">
                     	<li class="nav-item">
-	                        <a class="nav-link" href="/favourite">Yêu thích</a>
+	                        <a class="nav-link" href="/favorite">Yêu thích</a>
 	                    </li>
                     </c:if>
                     
