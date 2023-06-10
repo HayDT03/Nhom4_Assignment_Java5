@@ -8,7 +8,6 @@
 		<div class="row">
 		<c:set var="i" value="1"></c:set>
 		<c:forEach var="item" items="${listProduct}">
-				
 				<div class="col-md-3 mb-4">
 					<div class="card">
 						<img src="/image/${item.image}" class="card-img-top" alt="Book"
@@ -22,8 +21,6 @@
 									<i class="bi bi-cart"></i> Thêm giỏ hàng
 								</button>
 							</form>
-							
-								
 						</div>
 					</div>
 				</div>
