@@ -17,9 +17,11 @@
                     </li>
                     <c:if test="${not empty sessionScope.fullname}">
                     	<li class="nav-item">
-	                        <a class="nav-link" href="/favorite">Yêu thích</a>
+	                        <a class="nav-link" href="/favourite">Yêu thích</a>
 	                    </li>
-                    </c:if>                   
+                    </c:if>
+                    
+                    
                 </ul>
                 <form action="/allproduct" method="post" class="d-flex mx-auto" role="search" style="width: 35%">
                     <input name="keyword" value="${param.keyword}" class="form-control" type="search" placeholder="Search" aria-label="Search">
@@ -56,6 +58,7 @@
                         </ul>
                     </li>
                 </ul>
+                
             </div>
         </div>
     </nav>

@@ -49,6 +49,12 @@ public class MainController {
 		return "user/layout";
 	}
 	
+	@GetMapping("/favourite")
+	public String favourite(Model model) {
+		model.addAttribute("mainView", "favourite.jsp");
+		return "user/layout";
+	}
+	
 	@GetMapping("/allproduct")
 	public String allproduct(Model model, @RequestParam("keyword") Optional<String> name, @RequestParam("p") Optional<String> p) {
 		String findName;
