@@ -51,7 +51,7 @@ public class MainController {
 	}
 
 	@GetMapping("/allproduct")
-	public String allproduct(Model model, @RequestParam("keyword") Optional<String> name, @RequestParam("p") Optional<String> p) {
+	public String allproduct(Model model, @RequestParam("keyword") Optional<String> name, @RequestParam("p") Optional<Integer> p) {
 		String findName;
 		if(session.getAttribute("keyword")== null) {
 			findName = name.orElse("");
@@ -59,7 +59,7 @@ public class MainController {
 			findName = name.orElse(session.getAttribute("keyword"));
 		}
 		session.setAttribute("keyword", findName);
-		Pageable pageable = PageRequest.of(Integer.valueOf(0), 8);
+		Pageable pageable = PageRequest.of(p.orElse(0), 8);
 		Page<Product> page = pdao.findByNamePage("%"+findName+"%",pageable);
 		model.addAttribute("page", page);
 
@@ -82,7 +82,7 @@ public class MainController {
 			findName = name.orElse(session.getAttribute("keyword"));
 		}
 		session.setAttribute("keyword", findName);
-		Pageable pageable = PageRequest.of(Integer.valueOf(0), 8);
+		Pageable pageable = PageRequest.of(Integer.valueOf(0), 10);
 		Page<Product> page = pdao.findByNamePage("%"+findName+"%",pageable);
 		m.addAttribute("page", page);
 		return "redirect:/allproduct";
