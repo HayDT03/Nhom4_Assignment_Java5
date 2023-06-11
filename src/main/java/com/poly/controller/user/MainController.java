@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.dao.CartDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.entity.Product;
 import com.poly.service.SessionService;
@@ -21,13 +22,26 @@ import com.poly.service.SessionService;
 public class MainController {
 	@Autowired
 	SessionService session;
+	
 	@Autowired
 	ProductDAO pdao;
+	
+	@Autowired
+	CartDAO cdao;
+	
 	
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("mainView", "home.jsp");
 		model.addAttribute("listProduct", pdao.findRandomProducts());
+		String userID = session.getAttribute("username");
+		if(userID == null) {
+			session.setAttribute("cart", 0);
+		}else {
+			session.setAttribute("cart", cdao.countProductsByUserId(userID));
+		}
+		
+		
 		return "user/layout";
 	}
 	

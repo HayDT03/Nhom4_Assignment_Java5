@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top navbar-dark">
         <div class="container-fluid menu">
             <a class="navbar-brand" href="/">Book Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -23,15 +26,21 @@
                     
                     
                 </ul>
-                <form action="/allproduct" method="post" class="d-flex mx-auto" role="search" style="width: 35%">
+                <form action="/allproduct" method="post" class="d-flex" role="search">
                     <input name="keyword" value="${param.keyword}" class="form-control" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success ms-2" style="width: 35%" type="submit">Tìm kiếm</button>
+                    <button class="btn btn-outline-success ms-2 col-md-4 col-3" type="submit">Tìm kiếm</button>
                 </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 	<c:if test="${not empty sessionScope.fullname}">
-                    	<li class="nav-item navbar-righ">
-	                        <a class="nav-link" href="/cart"><i class="bi bi-cart"></i> Giỏ hàng</a>
-	                    </li>
+						<li class="nav-item navbar-righ position-relative" >
+	                        <a class="nav-link" href="/cart"><i class="bi bi-cart"></i> Giỏ hàng 
+	                        <span class="position-absolute top-1 end-25 translate-middle badge rounded-pill bg-danger">${sessionScope.cart}</span>
+							<span class="visually-hidden">unread messages</span>
+							</a>
+	                        
+						</li>
+					
+					
                     </c:if>
                 	
                     <li class="nav-item dropdown">
