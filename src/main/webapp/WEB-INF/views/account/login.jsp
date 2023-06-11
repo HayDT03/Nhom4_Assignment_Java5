@@ -42,6 +42,26 @@
 										        }, 5000); // Tắt cảnh báo sau 5 giây (5000 milliseconds)
 										    </script>
 										</c:if>
+										<c:if test="${not empty login}">
+										    <div id="alertMessage" class="alert alert-warning row" role="alert">
+										        <span class="me-auto col-8">${login}</span>
+										        <button type="button" class="btn-close ms-auto col-4" data-bs-dismiss="alert" aria-label="Close"></button>
+										    </div>
+										    <script>
+										        var alertMessage = document.getElementById('alertMessage');
+										        var closeButton = alertMessage.querySelector('.btn-close');
+										        var timeoutId;
+										
+										        closeButton.addEventListener('click', function() {
+										            alertMessage.style.display = 'none';
+										            clearTimeout(timeoutId);
+										        });
+										
+										        timeoutId = setTimeout(function() {
+										            alertMessage.style.display = 'none';
+										        }, 5000); // Tắt cảnh báo sau 5 giây (5000 milliseconds)
+										    </script>
+										</c:if>
 		                                </div>
 										
 		                                <div class="mb-3">

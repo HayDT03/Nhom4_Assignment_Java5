@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.ProductDAO;
@@ -48,13 +49,7 @@ public class MainController {
 		model.addAttribute("mainView", "contact.jsp");
 		return "user/layout";
 	}
-	
-	@GetMapping("/favourite")
-	public String favourite(Model model) {
-		model.addAttribute("mainView", "favourite.jsp");
-		return "user/layout";
-	}
-	
+
 	@GetMapping("/allproduct")
 	public String allproduct(Model model, @RequestParam("keyword") Optional<String> name, @RequestParam("p") Optional<String> p) {
 		String findName;
@@ -92,4 +87,5 @@ public class MainController {
 		m.addAttribute("page", page);
 		return "redirect:/allproduct";
 	}
+	
 }
