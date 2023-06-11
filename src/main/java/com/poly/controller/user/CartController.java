@@ -35,6 +35,12 @@ public class CartController {
 	@GetMapping("/cart")
 	public String cart(Model model) {
 		String username = session.getAttribute("username");
+		
+		if(!username.equals("")) {
+			session.setAttribute("cart", cdao.countProductsByUserId(username));
+		}else {
+			session.setAttribute("cart", 0);
+		}
 		List<Cart> listcart = cdao.findByUserId(username);
 		
 		if (listcart.isEmpty()) {
