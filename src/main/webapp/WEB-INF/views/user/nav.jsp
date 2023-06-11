@@ -45,11 +45,15 @@
              				</c:if>
                         </a>
                         <ul class="dropdown-menu">
-                        	<c:if test="${not empty sessionScope.fullname}">
+                        	<c:if test="${not empty sessionScope.user}">
                         		<li><a class="dropdown-item" href="/account/editprofile">Thay đổi thông tin</a></li>
+                        		<c:if test="${sessionScope.user.role}">
+                        			<li><a class="dropdown-item" href="/admin">Trang quản trị</a></li>
+                        		</c:if>
+                        		
              					<li><a class="dropdown-item" href="/account/logout">Đăng xuất</a></li>
              				</c:if>
-             				<c:if test="${empty sessionScope.fullname}">
+             				<c:if test="${empty sessionScope.user}">
              					<li><a class="dropdown-item" href="/account/login">Đăng nhập</a></li>
 	                            <li><a class="dropdown-item" href="/account/register">Đăng ký</a></li>
 	                            <li><a class="dropdown-item" href="/account/forgot">Quên mật khẩu</a></li>
