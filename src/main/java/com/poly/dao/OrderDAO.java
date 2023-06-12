@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.poly.entity.Order;
 
 @Repository
-public interface  OrderDAO extends JpaRepository<Order, Integer> {
+public interface  OrderDAO extends JpaRepository<Order, String> {
 	
 //	@Query("SELECT o FROM Order o")
 //	List<Order> findAll();

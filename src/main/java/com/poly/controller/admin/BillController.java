@@ -6,6 +6,11 @@ import java.util.Optional;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.entity.Order;
+import com.poly.entity.OrderDetail;
 
 @Controller
 public class BillController {
@@ -25,43 +31,49 @@ public class BillController {
 
 	@Autowired
 	OrderDAO dao;
+
 	@Autowired
 	OrderDetailDAO odDao;
-
-	// edit
-	@GetMapping("/admin/manage/bill/edit/{id}")
-	public String edit(Model model, @ModelAttribute("bill") Order entity) {
-		dao.saveAndFlush(entity);
-		return "redirect:/admin/manage/bill";
-	}
-
-	// delete
-	@SuppressWarnings("deprecation")
-	@GetMapping("/admin/manage/bill/remove/{id}")
-	public String removeProduct(Model model, @ModelAttribute("bill") Order entity, @PathVariable("id") Integer id) {
-		entity = dao.getOne(id);
-		dao.deleteById(id);
-		model.addAttribute("message", "Xoá thành công");
-		return "redirect:/admin/manage/bill";
-	}
-
-	// reset
-	@GetMapping("/admin/manage/bill/reset")
-	public String resetProduct() {
-		return "redirect:/admin/manage/bill";
-	}
 	
-	// set form
-		@SuppressWarnings("deprecation")
-		@GetMapping("/admin/manage/bill/{id}")
-		public String getForm(Model model, @ModelAttribute("bill") Order entity, @PathVariable("id") Integer id,
-				@RequestParam("p") Optional<Integer> p) {
-			entity = dao.getOne(id);
-			model.addAttribute("bill", entity);
-			List<Order> list=dao.findAll();
-			String link = "manage/bill";
-			model.addAttribute("list", list);
-			model.addAttribute("url", link);
-			return "admin/index";
+	// index
+	@GetMapping("/admin/manage/bill")
+	public String index(Model model, @RequestParam("p") Optional<Integer> p) {
+		Sort sort = Sort.by(Direction.ASC, "id");
+		if (p.orElse(0) < 0) {
+			return "redirect:/admin/manage/bill";
 		}
+		Pageable pageable = PageRequest.of(p.orElse(0), 10, sort);
+		Page<Order> page = dao.findAll(pageable);
+		if (!page.hasContent()) {
+			return "redirect:/admin/manage/bill";
+		}
+		model.addAttribute("pages", page);
+		Order entity = new Order();
+		String link = "manage/bill";
+		model.addAttribute("tittle", "Trang quản lý hoá đơn");
+		model.addAttribute("product", entity);
+		model.addAttribute("url", link);
+		return "admin/index";
+	}
+
+	@GetMapping("/admin/manage/bill/detail")
+	public String detail(@RequestParam("id") Optional<String> idOrders, Model model) {
+		String link = "manage/cart";
+		model.addAttribute("url", link);
+		model.addAttribute("tittle", "Trang chi tiết hóa đơn");
+		
+		if (idOrders.isPresent()) {
+			String id = idOrders.get();
+			Optional<Order> dOrder = dao.findById(id);
+			if (dOrder.isPresent()) {
+				Order order = dOrder.get();
+				model.addAttribute("bill", order);
+			} else
+				return "redirect:/admin/manage/bill/detail";
+		} else {
+			return "redirect:/admin/manage/bill/detail";
+		}
+		
+		return "admin/index";
+	}
 }
