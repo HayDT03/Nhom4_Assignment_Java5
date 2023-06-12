@@ -54,8 +54,13 @@ public class DetailController {
 		return "user/layout";
 	}
 	
+	@GetMapping("/detail/add-to-cart/{id}")
+	public String add(@PathVariable("id") String productID) {
+		return "redirect:/detail?pid="+productID;
+	}
+	
 	@PostMapping("/detail/add-to-cart/{id}")
-	public String add(@PathVariable("id") String productID, @RequestParam("quantity") Integer quantity) {
+	public String add2(@PathVariable("id") String productID, @RequestParam("quantity") Integer quantity) {
 		String username = session.getAttribute("username");
 		List<Cart> listc = cdao.findByUserId(username);
 		Boolean checkProduct = false;
@@ -81,6 +86,7 @@ public class DetailController {
 		
 		return "redirect:/cart";
 	}
+	
 	@GetMapping("/detail/like/{id}")
 	public String like(@PathVariable("id") String productID) {
 		Product entity = pdao.findById(productID).get();

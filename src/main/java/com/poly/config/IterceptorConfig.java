@@ -36,7 +36,7 @@ public class IterceptorConfig implements WebMvcConfigurer{
 		.excludePathPatterns("/css/**","/image/**","/js/**");
 		
 		registry.addInterceptor(auth)
-		.addPathPatterns("/cart","/cart/**", "/favorite","/favorite/**", "/admin", "/admin/**",  "/account/editprofile", "/account/editprofile/**");
+		.addPathPatterns("/cart","/cart/**", "/favorite","/favorite/**", "/admin", "/admin/**",  "/account/editprofile", "/account/editprofile/**", "/pay", "/pay/**", "/detail/add-to-cart/**");
 		
 		registry.addInterceptor(admin)
 		.addPathPatterns("/admin", "/admin/**");
