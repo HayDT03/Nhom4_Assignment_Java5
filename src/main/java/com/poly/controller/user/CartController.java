@@ -74,7 +74,7 @@ public class CartController {
 			entity.setProduct(pdao.getById(productID));
 			entity.setUser(udao.getById(username));
 			entity.setQuantityPurchased(1);
-			cdao.save(entity);
+			cdao.saveAndFlush(entity);
 		}
 		
 		return "redirect:/cart";
@@ -101,14 +101,17 @@ public class CartController {
 	@GetMapping("/cart/setquantity/{id}")
 	public String quantity(@PathVariable("id") Long cartID, @RequestParam("quantity") Integer quantity) {
 		Cart entity = cdao.getById(cartID);
+		Integer oldqty = entity.getQuantityPurchased();
 		if(quantity > 0) {
 			entity.setQuantityPurchased(quantity);
 			cdao.saveAndFlush(entity);
 		}else {
-			cdao.delete(entity);
+			entity.setQuantityPurchased(oldqty);
+			cdao.saveAndFlush(entity);
 		}
 		return "redirect:/cart";
 	}
+	
 	@GetMapping("/cart/delete/{id}")
 	public String delete(@PathVariable("id") Long cartID) {
 		Cart entity = cdao.getById(cartID);

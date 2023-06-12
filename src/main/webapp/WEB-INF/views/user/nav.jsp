@@ -10,10 +10,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/about">Giới thiệu</a>
+                        <a class="nav-link" aria-current="page" href="/about">Giới thiệu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/allproduct">Sách</a>
+                        <a class="nav-link" href="/product">Sách</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Liên hệ</a>
@@ -26,7 +26,7 @@
                     
                     
                 </ul>
-                <form action="/allproduct" method="post" class="d-flex" role="search">
+                <form action="/product" method="post" class="d-flex" role="search">
                     <input name="keyword" value="${param.keyword}" class="form-control" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success ms-2 col-md-4 col-3" type="submit">Tìm kiếm</button>
                 </form>

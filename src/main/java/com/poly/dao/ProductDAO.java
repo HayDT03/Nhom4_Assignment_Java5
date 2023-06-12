@@ -16,6 +16,9 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 	@Query(value = "SELECT TOP 8 * FROM Products ORDER BY NEWID()", nativeQuery = true)
     List<Product> findRandomProducts();
 	
+	@Query(value = "SELECT TOP 6 * FROM Products ORDER BY NEWID()", nativeQuery = true)
+    List<Product> findRandomRelateProducts();
+	
 	@Query("SELECT p FROM Product p WHERE p.quantity > 0")
 	List<Product> findAll();
 	
@@ -27,4 +30,6 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 	
 	@Query("SELECT p FROM Product p WHERE p.name LIKE ?1")
 	Page<Product> findByNamePage(String name, Pageable pageable);
+	
+	
 }
