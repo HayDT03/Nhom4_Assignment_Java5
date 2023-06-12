@@ -7,8 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-
-
+import com.poly.entity.Category;
 import com.poly.entity.Product;
 	
 public interface  ProductDAO extends JpaRepository<Product, String> {
@@ -31,5 +30,6 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 	@Query("SELECT p FROM Product p WHERE p.name LIKE ?1")
 	Page<Product> findByNamePage(String name, Pageable pageable);
 	
-	
+	@Query("SELECT p FROM Product p WHERE p.category = ?1")
+    Page<Product> findByCategory(Category category,Pageable pageable);
 }

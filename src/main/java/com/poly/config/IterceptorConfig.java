@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.poly.interceptor.AdminInterceptor;
 import com.poly.interceptor.AuthInterceptor;
 import com.poly.interceptor.LoggerInterceptor;
-import com.poly.interceptor.NotFoundInterceptor;
 
 @Configuration
 public class IterceptorConfig implements WebMvcConfigurer{
@@ -20,16 +19,10 @@ public class IterceptorConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	AdminInterceptor admin;
-	
-	@Autowired
-	NotFoundInterceptor notFound;
+
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		
-		registry.addInterceptor(notFound)
-		.addPathPatterns("/**")
-		.excludePathPatterns("/css/**","/image/**","/js/**");
 		
 		registry.addInterceptor(logger)
 		.addPathPatterns("/**")
