@@ -60,7 +60,7 @@ public class MainController {
 		}
 		session.setAttribute("keyword", findName);
 		Pageable pageable = PageRequest.of(Integer.valueOf(0), 8);
-		Page<Product> page = pdao.findByNamePage("%"+findName+"%",pageable);
+		Page<Product> page = pdao.findProductByNamePage("%"+findName+"%",pageable);
 		model.addAttribute("page", page);
 
 		model.addAttribute("mainView", "all_product.jsp");
@@ -83,7 +83,7 @@ public class MainController {
 		}
 		session.setAttribute("keyword", findName);
 		Pageable pageable = PageRequest.of(Integer.valueOf(0), 8);
-		Page<Product> page = pdao.findByNamePage("%"+findName+"%",pageable);
+		Page<Product> page = pdao.findProductByNamePage("%"+findName+"%",pageable);
 		m.addAttribute("page", page);
 		return "redirect:/allproduct";
 	}

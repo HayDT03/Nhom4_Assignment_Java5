@@ -26,5 +26,5 @@ public interface  ProductDAO extends JpaRepository<Product, String> {
 	Object entity(Product id);
 	
 	@Query("SELECT p FROM Product p WHERE p.name LIKE ?1")
-	Page<Product> findByNamePage(String name, Pageable pageable);
+	Page<Product> findProductByNamePage(String name, Pageable pageable);
 }

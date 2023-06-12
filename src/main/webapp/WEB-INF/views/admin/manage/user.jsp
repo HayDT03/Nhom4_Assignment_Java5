@@ -92,13 +92,13 @@
 	</form:form>
 </div>
 <div class="row my-4 col-md-12 justify-content-center">
-	<form class="form-inline">
+	<form action="/admin/manage/user/search" method="POST" class="form-inline">
 		<div class="form-group col-md-3">
 			<label class="text-right"><strong>Tìm kiếm:</strong></label>
 		</div>
 		<div class="form-group col-md-7">
-			<input type="text" class="form-control"
-				placeholder="Nhập tên người dùng để tìm">
+			<input class="form-control" name="keyword" value="${param.keyword}"
+				type="text" placeholder="Nhập tên sách để tìm"/>
 		</div>
 		<div class="form-group col-2 ">
 			<button type="submit" class="btn btn-success">Tìm</button>
@@ -123,7 +123,7 @@
 			</tr>
 		</thead>
 		<tbody class="bg-light">
-			<c:forEach var="list" items="${list}">
+			<c:forEach var="list" items="${list.content}">
 				<tr>
 					<td>${list.id}</td>
 					<td>${list.password}</td>
@@ -135,7 +135,7 @@
 					<td>${list.address}</td>
 					<td>${list.role ? 'Admin' : 'User'}</td>
 					<td>${list.active ? 'Đang hoạt động' : 'Bị Khoá'}</td>
-					<td><a href="/admin/manage/user/getform/${list.id}">Sửa</a>|
+					<td><a href="/admin/manage/user/getform/${list.id}">Chi tiết</a>|
 						<a href="/admin/manage/user/remove/${list.id}">Xóa</a></td>
 				</tr>
 			</c:forEach>
@@ -145,11 +145,37 @@
 <div class="row col-md-12 justify-content-center mb-4">
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
-			<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+			<c:if test="${list.number == 0}">
+				<li class="page-item"><a class="page-link" href=""
+					style="pointer-events: none;">&lt;&lt;</a></li>
+				<li class="page-item"><a class="page-link" href=""
+					style="pointer-events: none;">&lt;</a></li>
+			</c:if>
+			<c:if test="${list.number > 0}">
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=0">&lt;&lt;</a></li>
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=${list.number-1}">&lt;</a></li>
+			</c:if>
+			<c:forEach varStatus="i" begin="0" end="${list.totalPages-1}">
+				<li class="page-item"><a a class="page-link"
+					href="/admin/manage/user?p=${i.index}">${i.index + 1}</a></li>
+			</c:forEach>
 
-			<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-			<li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
+			<c:if test="${list.number < list.totalPages - 1}">
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=${list.number+1}">&gt;</a></li>
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=${list.totalPages-1}">&gt;&gt;</a></li>
+			</c:if>
+			<c:if test="${list.number == list.totalPages - 1}">
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=${list.number+1}"
+					style="pointer-events: none;">&gt;</a></li>
+				<li class="page-item"><a class="page-link"
+					href="/admin/manage/user?p=${list.totalPages-1}"
+					style="pointer-events: none;">&gt;&gt;</a></li>
+			</c:if>
 		</ul>
 	</nav>
 </div>

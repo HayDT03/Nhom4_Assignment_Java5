@@ -2,6 +2,8 @@ package com.poly.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +18,7 @@ public interface  UserDAO extends JpaRepository<User, String> {
 	
 	@Query("SELECT u.phone FROM User u")
     List<String> getAllPhones();
+	
+	@Query("SELECT u FROM User u WHERE u.id LIKE ?1 OR u.phone LIKE ?1 OR u.fullname LIKE ?1 OR u.email LIKE ?1")
+	Page<User> findUserByNamePage(String name, Pageable pageable);
 }

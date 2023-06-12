@@ -9,15 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.OrderDAO;
+import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Order;
+import com.poly.entity.OrderDetail;
 import com.poly.entity.Product;
 import com.poly.entity.User;
 
@@ -60,8 +64,14 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/manage/user")
-	public String user(Model model) {
-		List<User> list = udao.findAll();
+	public String user(Model model, @RequestParam("p") Optional<Integer> p) {
+		Pageable pageable;
+		try {
+			pageable = PageRequest.of(p.orElse(0), 5);
+		} catch (Exception e) {
+			pageable = PageRequest.of(0, 5);
+		}
+		Page<User> list = udao.findAll(pageable);
 		User entity = new User();
 		String link = "manage/user";
 		model.addAttribute("tittle", "Trang quản lý người dùng");
@@ -83,6 +93,26 @@ public class AdminController {
 		String link = "manage/bill";
 		model.addAttribute("tittle", "Trang quản lý hoá đơn");
 		model.addAttribute("product", entity);
+		model.addAttribute("url", link);
+		return "admin/index";
+	}
+	@Autowired
+	OrderDetailDAO odDao;
+	
+	@GetMapping("/admin/statistic/product")
+	public String statisticP(Model model) {
+		model.addAttribute("top10", odDao.getTop10SPBanChay(PageRequest.of(0, 10, Sort.by(Direction.DESC, "soLuong"))));
+		String link = "statistic/product";
+		model.addAttribute("tittle", "Trang thống kê sản phẩm");
+		model.addAttribute("url", link);
+		return "admin/index";
+	}
+	
+	@GetMapping("/admin/statistic/revenue")
+	public String statisticR(Model model) {
+		model.addAttribute("doanhThu", odDao.getDoanhThu(PageRequest.of(0, 10)));
+		String link = "statistic/revenue";
+		model.addAttribute("tittle", "Trang thống kê doanh thu");
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
