@@ -43,9 +43,9 @@
 						<td>${item.date}</td>
 						<td>
 						<c:choose>
-						<c:when test="${item.status=0 }">Đã xóa</c:when>
-						<c:when test="${item.status=1 }">Chờ xác nhận</c:when>
-						<c:when test="${item.status=2 }"></c:when>
+						<c:when test="${item.status==0 }">Đã xóa</c:when>
+						<c:when test="${item.status==1 }">Chờ xác nhận</c:when>
+						<c:when test="${item.status==2 }">Đã xác nhận</c:when>
 						<c:otherwise></c:otherwise>
 						</c:choose>
 						</td>

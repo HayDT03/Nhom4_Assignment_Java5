@@ -13,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.ProductDAO;
 import com.poly.entity.Product;
+import com.poly.service.SessionService;
 
 @Controller
 public class ProductController {
@@ -27,12 +29,16 @@ public class ProductController {
 	@Autowired
 	ProductDAO dao;
 
+	@Autowired
+	SessionService session;
+	
 	// create
 	@GetMapping("/admin/manage/product/save")
 	public String create(Model model, @ModelAttribute("product") Product entity) {
 		dao.saveAndFlush(entity);
 		String link = "manage/product";
 		model.addAttribute("url", link);
+		model.addAttribute("tittle", "Trang quản lý sản phẩm");
 		return "admin/index";
 	}
 
@@ -52,6 +58,7 @@ public class ProductController {
 		Page<Product> list = dao.findAll(pageable);
 		String link = "manage/product";
 		model.addAttribute("list", list);
+		model.addAttribute("tittle", "Trang quản lý sản phẩm");
 		model.addAttribute("url", link);
 		return "admin/index";
 	}
@@ -78,5 +85,24 @@ public class ProductController {
 	@GetMapping("/admin/manage/product/reset")
 	public String resetProduct() {
 		return "redirect:/admin/manage/product";
+	}
+	
+	@RequestMapping("/admin/manage/product/search")
+	public String seachProduct(Model model, @RequestParam("keyword") Optional<String> name, @RequestParam("p") Optional<Integer> p,
+			@ModelAttribute("product") Product entity) {
+		String findName;
+		if(session.getAttribute("keyword") == null) {
+			findName = name.orElse("");
+		}else {
+			findName = name.orElse(session.getAttribute("keyword"));
+		}
+		session.setAttribute("keyword", findName);
+		Pageable pageable = PageRequest.of(p.orElse(0), 5);
+		Page<Product> page = dao.findByNamePage("%" + findName + "%", pageable);
+		model.addAttribute("list",page);
+		String link = "manage/product";
+		model.addAttribute("tittle", "Trang quản lý sản phẩm");
+		model.addAttribute("url", link);
+		return "admin/index";
 	}
 }

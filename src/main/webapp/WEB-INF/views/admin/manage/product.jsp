@@ -22,7 +22,7 @@
 					path="author" />
 			</div>
 			<div class="form-group">
-				<label>Giá<label>
+				<label>Giá</label>
 				<form:input type="number" class="form-control" min="0" id="price"
 					path="price" />
 			</div>
@@ -59,13 +59,13 @@
 	</form>
 </div>
 <div class="row my-4 col-md-12 justify-content-center">
-	<form class="form-inline">
+	<form action="/admin/manage/product/search" method="POST" class="form-inline">
 		<div class="form-group col-md-3">
 			<label class="text-right"><strong>Tìm kiếm:</strong></label>
 		</div>
 		<div class="form-group col-md-7">
-			<input type="text" class="form-control"
-				placeholder="Nhập tên sách để tìm">
+			<input class="form-control" name="keyword" value="${param.keyword}"
+				type="text" placeholder="Nhập tên sách để tìm"/>
 		</div>
 		<div class="form-group col-2 ">
 			<button type="submit" class="btn btn-success">Tìm</button>

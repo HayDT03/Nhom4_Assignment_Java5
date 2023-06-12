@@ -13,7 +13,7 @@
             <!-- San pham MỚI -->
                     <c:forEach var="item" items="${listFavourite}">
                         <!-- San pham 1 -->
-                        <div class="col-md-3 mb-4">
+                        <div class="col-md-3 mb-4" onclick="window.location.href='/detail?pid=${item.product.id}'">
                             <div class="card">
                                 <img src="/image/${item.product.image}" class="card-img-top" alt="Book 1" height="300px">
                                 <div class="card-body">
