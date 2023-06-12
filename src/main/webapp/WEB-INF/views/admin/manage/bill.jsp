@@ -7,7 +7,7 @@
 	<div class="row col-md-12 justify-content-center my-4">
 		<h2>Quản lý hóa đơn</h2>
 	</div>
-	
+
 	<div class="row my-4 col-md-12 justify-content-center">
 		<form class="form-inline">
 			<div class="form-group col-md-3">
@@ -23,7 +23,7 @@
 		</form>
 	</div>
 	<div class="row">
-		<table class="table table-hover mt-2 mb-5" >
+		<table class="table table-hover mt-2 mb-5">
 			<thead class="thead-dark">
 				<tr>
 					<th>Mã hóa đơn</th>
@@ -41,15 +41,20 @@
 						<td>${item.user.id}</td>
 						<td>${item.total}</td>
 						<td>${item.date}</td>
-						<td>
-						<c:choose>
-						<c:when test="${item.status==0 }">Đã xóa</c:when>
-						<c:when test="${item.status==1 }">Chờ xác nhận</c:when>
-						<c:when test="${item.status==2 }">Đã xác nhận</c:when>
-						<c:otherwise></c:otherwise>
-						</c:choose>
-						</td>
-						<td><a href="/admin/manage/bill/detail?id=${item.id}">Chi tiet</a></td>
+						<td><c:choose>
+								<c:when test="${item.status==2 }">
+									<div style="color: red;">Đã xóa</div>
+								</c:when>
+								<c:when test="${item.status==0 }">
+									<div style="color: orange;">Chờ xác nhận</div>
+								</c:when>
+								<c:when test="${item.status==1 }">
+									<div style="color: green;">Đã xác nhận</div>
+								</c:when>
+								<c:otherwise></c:otherwise>
+							</c:choose></td>
+						<td><a href="/admin/manage/bill/detail?id=${item.id}">Chi
+								tiet</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

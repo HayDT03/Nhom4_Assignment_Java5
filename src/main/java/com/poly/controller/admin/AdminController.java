@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,10 +36,28 @@ public class AdminController {
 	UserDAO udao;
 
 	@GetMapping("/admin")
-	public String admin(Model model) {
+	public String admin(Model model, @RequestParam("p") Optional<Integer> p) {
 		String link = "statistic/indextemp";
 		model.addAttribute("tittle", "Trang chủ");
 		model.addAttribute("url", link);
+		
+		
+		Sort sort = Sort.by(Direction.DESC, "price");
+		if (p.orElse(0) < 0) {
+			return "redirect:/admin/manage/bill";
+		}
+		Pageable pageable = PageRequest.of(p.orElse(0), 5,sort);
+		Page<Product> page = pdao.findAll(pageable);
+		if (!page.hasContent()) {
+			return "redirect:/admin/manage/bill";
+		}
+
+		
+		model.addAttribute("list", page);
+		Product entity = new Product();
+		model.addAttribute("product", entity);
+		model.addAttribute("url", link);
+		
 		return "admin/index";
 	}
 

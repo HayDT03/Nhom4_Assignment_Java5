@@ -43,7 +43,7 @@ public class Order implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DateCreate")
 	Date date = new Date();
-	String status;
+	Integer status;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
