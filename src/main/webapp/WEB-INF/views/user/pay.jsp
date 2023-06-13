@@ -67,7 +67,7 @@
 			
 							timeoutId = setTimeout(function() {
 								alertMessage.style.display = 'none';
-							}, 5000); // Tắt cảnh báo sau 5 giây (5000 milliseconds)
+							}, 10000); // Tắt cảnh báo sau 5 giây (5000 milliseconds)
 						</script>
 					</c:if>
 					<form action="/pay" method="post" class="my-5">

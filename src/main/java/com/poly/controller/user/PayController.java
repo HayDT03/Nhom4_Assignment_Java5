@@ -2,8 +2,12 @@ package com.poly.controller.user;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +24,7 @@ import com.poly.entity.User;
 import com.poly.service.SessionService;
 
 @Controller
+@EnableAsync
 public class PayController {
 	
 	@Autowired
@@ -70,6 +75,7 @@ public class PayController {
 			entity.setDate(new Date());
 			entity.setStatus(0);
 			odao.saveAndFlush(entity);
+			
 			for (Cart cart : listC) {
 				OrderDetail odetail = new OrderDetail();
 				odetail.setOrder(entity);
@@ -77,15 +83,24 @@ public class PayController {
 				odetail.setProduct(cart.getProduct());
 				odetail.setQuantityPurchased(cart.getQuantityPurchased());
 				ddao.saveAndFlush(odetail);
+				cdao.delete(cart);
 			}
+			session.setAttribute("cart", 0);
 			
 		}else {
 			attributes.addFlashAttribute("message", "Vui lòng chọn hàng hóa để thanh toán");
 			return "redirect:/cart";
 		}
+		
+		try {
+			
+			delayAndRedirect();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.addAttribute("message", "Thanh toán thành công");
-		model.addAttribute("mainView", "pay.jsp");
-		return "user/layout";
+		return "user/success";
 	}
 	
 	public String createOrderID () {
@@ -112,4 +127,10 @@ public class PayController {
 		}
 		return total;
 	}
+	
+	@Async
+    public CompletableFuture<String> delayAndRedirect() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5); // Đợi 10 giây
+        return CompletableFuture.completedFuture("redirect:/"); // Chuyển hướng về "/"
+    }
 }
