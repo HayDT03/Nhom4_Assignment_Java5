@@ -6,4 +6,8 @@
 	function myMessage() {
 		alert("${message}");
 	}
+	$(window).on('load', function () {
+        $(".loader").fadeOut();
+        $("#preloder").delay(100).fadeOut("slow");
+    });
 </script>
