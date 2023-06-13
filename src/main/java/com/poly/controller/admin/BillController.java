@@ -38,7 +38,7 @@ public class BillController {
 	// index
 	@GetMapping("/admin/manage/bill")
 	public String index(Model model, @RequestParam("p") Optional<Integer> p) {
-		Sort sort = Sort.by(Direction.ASC, "id");
+		Sort sort = Sort.by(Direction.ASC, "status");
 		if (p.orElse(0) < 0) {
 			return "redirect:/admin/manage/bill";
 		}
@@ -57,7 +57,7 @@ public class BillController {
 	}
 
 	@GetMapping("/admin/manage/bill/detail")
-	public String detail(@RequestParam("id") Optional<String> idOrders, Model model) {
+	public String detail(@RequestParam("id") Optional<String> idOrders, Model model, @RequestParam("p") Optional<Integer> p) {
 		String link = "manage/cart";
 		model.addAttribute("url", link);
 		model.addAttribute("tittle", "Trang chi tiết hóa đơn");
@@ -76,4 +76,41 @@ public class BillController {
 		
 		return "admin/index";
 	}
+	
+	@GetMapping("/admin/manage/bill/cancel")
+	public String OrderCancel(Model m, @RequestParam("id") Optional<String> IdOrders) {
+		if (IdOrders.isPresent()) {
+			String id = IdOrders.get();
+			Optional<Order> opOrder = dao.findById(id);
+			if (opOrder.isPresent()) {
+				Order order = opOrder.get();
+				if (!order.getStatus().equals(2)) {
+					order.setStatus(2);
+					dao.saveAndFlush(order);
+				}
+				return "redirect:/admin/manage/bill/detail?id="+order.getId();
+			} else
+				return "redirect:/admin/manage/bill";
+		} else
+			return "redirect:/admin/manage/bill";
+	}
+
+	@GetMapping("/admin/manage/bill/accept")
+	public String OrderAccept(Model m, @RequestParam("id") Optional<String> IdOrders) {
+		if (IdOrders.isPresent()) {
+			String id = IdOrders.get();
+			Optional<Order> opOrder = dao.findById(id);
+			if (opOrder.isPresent()) {
+				Order order = opOrder.get();
+				if (!order.getStatus().equals(1)) {
+					order.setStatus(1);
+					dao.saveAndFlush(order);
+				}
+				return "redirect:/admin/manage/bill/detail?id=" + order.getId();
+			} else
+				return "redirect:/admin/manage/bill";
+		} else
+			return "redirect:/admin/manage/bill";
+	}
+	
 }

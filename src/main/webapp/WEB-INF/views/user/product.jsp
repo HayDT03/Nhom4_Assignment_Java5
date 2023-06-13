@@ -16,11 +16,13 @@
               <i class="bi bi-card-list"></i>
               Danh mục sản phẩm
             </div>
+            
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="#">Sách thiếu nhi</a></li>
-                <li class="list-group-item"><a href="#">Sách giáo dục</a></li>
-                <li class="list-group-item"><a href="#">Sách nấu ăn</a></li>
+            	<c:forEach var="cat" items="${listCat}">
+                	<li class="list-group-item"><a href="/product/${cat.id}">${cat.name}</a></li>
+                </c:forEach>
             </ul>
+            
           </div>
         </div>
         <!-- =============================== -->

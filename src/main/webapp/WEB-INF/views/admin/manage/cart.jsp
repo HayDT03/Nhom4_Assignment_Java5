@@ -13,7 +13,7 @@
 					<th>Tổng tiền</th>
 					<th>Ngày lập</th>
 					<th>Trạng thái</th>
-					<th></th>
+					<th>
 				</tr>
 			</thead>
 			<tbody class="bg-light">
@@ -23,8 +23,27 @@
 					<td>${bill.user.fullname}</td>
 					<td>${bill.total}</td>
 					<td><fmt:formatDate value="${bill.date}" pattern="dd-MM-yyyy" /></td>
-					<td>${bill.status }</td>
-					<td></td>
+					<td><c:choose>
+						<c:when test="${bill.status==2 }">Đã xóa</c:when>
+						<c:when test="${bill.status==0 }">Chờ xác nhận</c:when>
+						<c:when test="${bill.status==1 }">Đã xác nhận</c:when>
+						<c:otherwise></c:otherwise>
+						</c:choose>
+					</td>
+					
+					
+					<td><c:if test="${bill.status==0}">
+							<a href="/admin/manage/bill/accept?id=${bill.id }"
+								class="btn btn-success">Xác nhận</a>
+							<a href="/admin/manage/bill/cancel?id=${bill.id }"
+								class="btn btn-danger">Hủy</a>
+						</c:if>
+						<c:if test="${bill.status==1}">
+							<div>Đã xác nhận</div>
+						</c:if>
+						 <c:if test="${bill.status==2 }">
+							<div>Hóa đơn đã hủy</div>
+						</c:if></td>
 				</tr>
 			</tbody>
 		</table>
@@ -48,32 +67,16 @@
 			<c:forEach items="${bill.orderDetails}" var="orderDetail">
 				<tr>
 					<td>${stt }</td>
-					
 					<td><img src="/image/${orderDetail.product.image}"
 						width="100%"></td>
 					<td class="text-center">${orderDetail.product.name}</td>
 					<td>${orderDetail.product.author}</td>
-					<td class="text-center">${orderDetail.product.price} VND</td>
+					<td class="text-center">${orderDetail.product.price}VND</td>
 					<td class="text-center">${orderDetail.quantityPurchased}</td>
 					<td class="text-center"></td>
 				</tr>
-				<c:set var="stt" value="${stt+1 }"/>
+				<c:set var="stt" value="${stt+1 }" />
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="row col-md-12 justify-content-center mb-4">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link"
-					href="?p=${pages.number-1}">&lt;&lt;</a></li>
-				<c:forEach var="i" begin="1" end="${pages.totalPages}">
-					<li class='page-item ${pages.number == i-1 ? "active":""}'><a
-						class="page-link" href="?p=${i-1}">${i}</a></li>
-				</c:forEach>
-
-				<li class="page-item"><a class="page-link"
-					href="?p=${pages.number+1}">&gt;&gt;</a></li>
-			</ul>
-		</nav>
-	</div>
 </div>
