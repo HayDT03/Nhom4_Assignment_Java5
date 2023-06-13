@@ -43,7 +43,7 @@
 							
 						</div>
 						<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-							<h5 class="mb-0"> <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></h5>
+							<h5 class="mb-0"> <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></h5>
 						</div>
 						<div class="col-md-1 col-lg-1 col-xl-1 ">
 							<a href="/cart/delete/${item.id}" class="text-danger alert-heading"><i
