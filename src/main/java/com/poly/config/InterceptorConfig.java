@@ -10,7 +10,7 @@ import com.poly.interceptor.AuthInterceptor;
 import com.poly.interceptor.LoggerInterceptor;
 
 @Configuration
-public class IterceptorConfig implements WebMvcConfigurer{
+public class InterceptorConfig implements WebMvcConfigurer{
 	@Autowired
 	LoggerInterceptor logger;
 	

@@ -20,7 +20,7 @@
                                     <h5 class="card-title" style="min-height: 2.5em;">${item.product.name}</h5>
                                     <p class="card-text">Tác giả: ${item.product.author}   
                                     </p>
-                                    <p class="card-text">Giá: <fmt:formatNumber value="${item.product.price}" type="number" pattern="0" /> VND</p>
+                                    <p class="card-text">Giá: <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></p>
                   
                                    <form action="/cart/add">
 										<button type="submit" formaction="/cart/add/${item.product.id}" class="btn btn-outline-primary col-12">

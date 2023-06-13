@@ -43,7 +43,7 @@
 							
 						</div>
 						<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-							<h5 class="mb-0"> <fmt:formatNumber value="${item.product.price}" type="number" pattern="0" /> VND</h5>
+							<h5 class="mb-0"> <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></h5>
 						</div>
 						<div class="col-md-1 col-lg-1 col-xl-1 ">
 							<a href="/cart/delete/${item.id}" class="text-danger alert-heading"><i
@@ -58,7 +58,7 @@
 		<c:if test="${not empty listCart}">
 			<div class="col-12 row">
 				<div class="col-6">
-					<h5>Tổng tiền: <fmt:formatNumber value="${total}" type="number" pattern="0" /> VND </h5>
+					<h5>Tổng tiền: <fmt:formatNumber value="${total}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></h5>
 				</div>
 				<div class="col-6">
 					<a href="/pay" class="btn btn-danger left-button">Thanh toán</a>

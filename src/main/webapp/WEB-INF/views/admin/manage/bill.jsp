@@ -8,7 +8,7 @@
 		<h2>Quản lý hóa đơn</h2>
 	</div>
 
-	<div class="row my-4 col-md-12 justify-content-center">
+<%-- 	<div class="row my-4 col-md-12 justify-content-center">
 		<form class="form-inline">
 			<div class="form-group col-md-3">
 				<label class="text-right"><strong>Tìm kiếm:</strong></label>
@@ -21,7 +21,7 @@
 				<button type="submit" class="btn btn-success">Tìm</button>
 			</div>
 		</form>
-	</div>
+	</div> --%>
 	<div class="row">
 		<table class="table table-hover mt-2 mb-5">
 			<thead class="thead-dark">

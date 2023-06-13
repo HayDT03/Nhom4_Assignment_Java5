@@ -14,7 +14,7 @@
 				<h1>${product.name}</h1>
 				<h5>Tác giả: ${product.author}</h5>
 				<hr>
-				<h6 class="text-info">Giá bán: <fmt:formatNumber value="${product.price}" type="number" pattern="0" /> VND</h6>
+				<h6 class="text-info">Giá bán: <fmt:formatNumber value="${product.price}" type="currency" currencySymbol="VND" maxFractionDigits="0"/></h6>
 				<hr>
 				<p style="min-height: 5.5em;">Mô tả: ${product.description}</p>
 				<hr>
