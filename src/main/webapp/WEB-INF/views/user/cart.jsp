@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<main class="mt-5 p-5 min-vh-100">
+<main class="mt-5 min-vh-100">
 	<div class="container mt-4">
 		<h1 class="text-center">GIỎ HÀNG</h1>
 		<!-- San pham MỚI -->
@@ -68,3 +68,4 @@
 		
 	</div>
 </main>
+<br><br>

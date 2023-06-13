@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<main class="p-5">
+<main class="p-1">
 	<h1 class="text-center">DANH SÁCH SẢN PHẨM YÊU THÍCH</h1>
     <div class="container mt-5">
     	 <div class="row">   

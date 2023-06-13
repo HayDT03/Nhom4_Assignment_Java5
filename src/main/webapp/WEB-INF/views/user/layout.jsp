@@ -13,6 +13,8 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
+	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div class="mt-5">
 		<jsp:include page="${mainView}"></jsp:include>
 	</div>
