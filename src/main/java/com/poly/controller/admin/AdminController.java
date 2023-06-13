@@ -102,18 +102,6 @@ public class AdminController {
 	@Autowired
 	OrderDAO odao;
 
-	@GetMapping("/admin/manage/bill")
-	public String bill(Model model) {
-		
-		List<Order> page = odao.findAll();
-		model.addAttribute("list", page);
-		Order entity = new Order();
-		String link = "manage/bill";
-		model.addAttribute("tittle", "Trang quản lý hoá đơn");
-		model.addAttribute("product", entity);
-		model.addAttribute("url", link);
-		return "admin/index";
-	}
 	@Autowired
 	OrderDetailDAO odDao;
 	
