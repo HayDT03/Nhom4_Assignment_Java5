@@ -1,5 +1,6 @@
 package com.poly.controller.user;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,35 @@ public class FavoriteController {
 	
 	@GetMapping("/favorite/delete/{id}")
 	public String delete(@PathVariable("id") Long cartID) {
-		Favorite entity = fdao.getById(cartID);
+		Favorite entity = fdao.findById(cartID).get();
 		fdao.delete(entity);
+		
+		return "redirect:/favorite";
+	}
+	
+	@GetMapping("/favorite/add/{pid}")
+	public String add(@PathVariable("pid") String pid) {
+		
+		String userID = session.getAttribute("username");
+		if (userID != null) {
+
+			if (fdao.isProductLikedByUser(userID, pid) > 0) {
+				Favorite entity = fdao.findByUserAndProduct(udao.findById(userID).get(), pdao.findById(pid).get())
+						.get();
+				entity.setCreateDate(new Date());
+				fdao.saveAndFlush(entity);
+
+			} else {
+
+				Favorite entity = new Favorite();
+				entity.setProduct(pdao.findById(pid).get());
+				entity.setUser(udao.findById(userID).get());
+				entity.setCreateDate(new Date());
+				fdao.saveAndFlush(entity);
+
+			}
+		}
+		
 		
 		return "redirect:/favorite";
 	}

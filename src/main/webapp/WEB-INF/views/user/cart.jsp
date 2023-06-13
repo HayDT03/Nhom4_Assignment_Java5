@@ -17,7 +17,7 @@
 						<div class="col-md-2 col-lg-2 col-xl-2">
 							<img
 								src="/image/${item.product.image}"
-								class="img-fluid rounded-3" alt="Cotton T-shirt">
+								class="img-fluid rounded-3" alt="Cotton T-shirt" onclick="window.location.href='/detail?pid=${item.product.id}'">
 						</div>
 						<div class="col-md-3 col-lg-3 col-xl-3">
 							<p class="lead fw-normal mb-2">${item.product.name}</p>
@@ -30,7 +30,7 @@
 									<button class="btn btn-link px-2" formaction="/cart/reduced/${item.id}">
 										<i class="bi bi-dash" ></i>
 									</button>
-									<input id="form1" min="0" name="quantity" value="${item.quantityPurchased}"
+									<input id="form1" min="1" name="quantity" value="${item.quantityPurchased}"
 										class="form-control form-control-sm"
 										style="width: 70px; text-align: center;" onblur="this.form.submit()" type="number">
 		
@@ -61,7 +61,7 @@
 					<h5>Tổng tiền: <fmt:formatNumber value="${total}" type="number" pattern="0" /> VND </h5>
 				</div>
 				<div class="col-6">
-					<a href="#" class="btn btn-danger left-button">Thanh toán</a>
+					<a href="/pay" class="btn btn-danger left-button">Thanh toán</a>
 				</div>
 			</div>
 		</c:if>
