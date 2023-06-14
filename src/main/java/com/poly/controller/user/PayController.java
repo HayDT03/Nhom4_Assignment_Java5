@@ -130,7 +130,7 @@ public class PayController {
 	
 	@Async
     public CompletableFuture<String> delayAndRedirect() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(5); // Đợi 10 giây
+        TimeUnit.SECONDS.sleep(5); // Đợi 5 giây
         return CompletableFuture.completedFuture("redirect:/"); // Chuyển hướng về "/"
     }
 }

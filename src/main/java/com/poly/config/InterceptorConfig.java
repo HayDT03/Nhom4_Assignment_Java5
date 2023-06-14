@@ -7,6 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.poly.interceptor.AdminInterceptor;
 import com.poly.interceptor.AuthInterceptor;
+import com.poly.interceptor.ChangePassInterceptor;
+import com.poly.interceptor.ConfirmInterceptor;
 import com.poly.interceptor.LoggerInterceptor;
 
 @Configuration
@@ -19,6 +21,12 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	AdminInterceptor admin;
+	
+	@Autowired
+	ChangePassInterceptor change;
+	
+	@Autowired
+	ConfirmInterceptor confirm;
 
 	
 	@Override
@@ -33,5 +41,11 @@ public class InterceptorConfig implements WebMvcConfigurer{
 		
 		registry.addInterceptor(admin)
 		.addPathPatterns("/admin", "/admin/**");
+		
+		registry.addInterceptor(confirm)
+		.addPathPatterns("/account/confirm", "/account/confirm/**");
+		
+		registry.addInterceptor(change)
+		.addPathPatterns("/account/change", "/account/change/**");
 	}
 }

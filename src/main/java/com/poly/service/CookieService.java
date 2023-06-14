@@ -47,6 +47,16 @@ public class CookieService {
 		return cookie;
 		
 	}
+	
+	public Cookie addOTP(String name, String value, int minutes) {
+		Cookie cookie = new Cookie(name, value);
+		cookie.setMaxAge(minutes * 60);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		return cookie;
+		
+	}
+	
 	public void delete(String name) {
 		Cookie cookie = new Cookie(name, "");
 		cookie.setMaxAge(0);

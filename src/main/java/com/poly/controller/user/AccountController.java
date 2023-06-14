@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.poly.dao.UserDAO;
 import com.poly.entity.User;
@@ -184,7 +187,97 @@ public class AccountController {
 	
 	@GetMapping("/account/forgot")
 	public String forgot() {
+		sessionService.removeAttribute("email");
+		cookieService.delete("OTP");
+		sessionService.removeAttribute("Change");
 		return "account/forgot";
+	}
+	
+	@PostMapping("/account/forgot")
+	public String forgot2(RedirectAttributes redirectAttributes, Model model, @RequestParam("email") String email, @RequestParam("username") String username ) {
+		User user = null;
+		if(udao.findById(username).isPresent()) {
+			user = udao.findById(username).get();
+		}
+		 
+		if(user != null) {
+			if(user.getEmail().equalsIgnoreCase(email)) {
+				sessionService.setAttribute("email", user.getEmail());
+				String OTP = generateOTP(6);
+				System.out.println("OTP: "+OTP);
+				cookieService.addOTP("OTP", OTP, 1);
+				sessionService.setAttribute("username", username);
+				sendMailOTP(user.getEmail(), OTP);
+				return "redirect:/account/confirm";
+			}else {
+				model.addAttribute("message", "Email không hợp lệ");
+			}
+		}else {
+			model.addAttribute("message", "Không tìm thấy tài khoản "+username);
+		}
+		
+		return "account/forgot";
+	}
+	
+	@GetMapping("/account/confirm")
+	public String confirm(Model model) {
+		String email = sessionService.getAttribute("email");
+		
+        model.addAttribute("email", maskEmail(email));
+		return "account/confirm";
+	}
+	
+	@PostMapping("/account/confirm")
+	public String confirm2(Model model, @RequestParam("otp") String otpUser) {
+		String OTP = cookieService.getValue("OTP");
+        if(OTP != null) {
+        	if(OTP.equals(otpUser)) {
+        		cookieService.delete("OTP");
+        		sessionService.setAttribute("Change", true);
+        		return "redirect:/account/change";
+        	}else {
+				model.addAttribute("message", "OTP không hợp lệ");
+				String email = (String) sessionService.getAttribute("email");
+				model.addAttribute("email", maskEmail(email));
+			}
+        }else {
+        	model.addAttribute("messageOTP", "OTP hết hạn");
+		}
+        
+		return "account/confirm";
+	}
+	
+	@GetMapping("/account/change")
+	public String change() {
+		return "account/change";
+	}
+	
+	@PostMapping("/account/change")
+	public String change2(Model model, @RequestParam("password") String password, @RequestParam("passwordConfirm") String passwordConfirm) {
+		System.out.println("pl: "+password.length());
+		if(password.length() >= 6) {
+			if (password.equals(passwordConfirm)) {
+				String username = sessionService.getAttribute("username");
+				if (username != null) {
+					User user = udao.findById(username).get();
+					user.setPassword(password);
+					udao.saveAndFlush(user);
+					sessionService.removeAttribute("Change");
+					model.addAttribute("messageSuccess", "Đổi mật khẩu thành công, bạn sẽ được chuyển hướng về trang đăng nhập.");
+				} else {
+					return "redirect:/account/forgot";
+				}
+			} else {
+				model.addAttribute("message", "Mật khẩu xác nhận chưa chính xác");
+			}
+		}else {
+			model.addAttribute("message", "Mật khẩu ít nhất 6 kí tự");
+		}
+		
+		
+		
+		
+		return "account/change";
 	}
 	
 	@GetMapping("/account/editprofile")
@@ -311,4 +404,74 @@ public class AccountController {
 		sender.send(message);
 		System.out.println("message: Gửi mail thành công");
 	}
+	
+	public void sendMailOTP(String emailUser, String OTP) {
+		MailModel mail = new MailModel();
+		mail.setTo(emailUser);
+		mail.setSubject("Mã xác nhận");
+		mail.setBody("<!DOCTYPE html>\r\n"
+				+ "<html lang=\"en\">\r\n"
+				+ "<head>\r\n"
+				+ "    <meta charset=\"UTF-8\">\r\n"
+				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
+				+ "    <title>OTP</title>\r\n"
+				+ "</head>\r\n"
+				+ "<body>\r\n"
+				+ "    <h1>Mã OTP của bạn</h1>\r\n"
+				+ "    <p>Xin chào,</p>\r\n"
+				+ "    <p>Dưới đây là mã OTP của bạn:</p>\r\n"
+				+ "    <h3 style=\" color: cyan; width: fit-content;\"  >"+OTP+"</h3>\r\n"
+				+ "    <p>Vui lòng sử dụng mã này để xác nhận đổi mật khẩu. <span style=\"color: red;\">Lưu ý mã có thời hạn trong 60 giây, không chia sẽ mã cho bất kì ai!</span></p>\r\n"
+				+ "    <p>Trân trọng,</p>\r\n"
+				+ "    <p>Đội ngũ hỗ trợ</p>\r\n"
+				+ "</body>\r\n"
+				+ "</html>");
+		MimeMessage message = sender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(mail.getFrom());
+			helper.setTo(mail.getTo());
+			helper.setSubject(mail.getSubject());
+			helper.setText(mail.getBody(), true);
+			helper.setReplyTo(mail.getFrom());
+			for (String email : mail.getCc()) {
+				helper.addCc(email);
+			}
+			
+			for (String email : mail.getBcc()) {
+				helper.addBcc(email);
+			}
+
+		} catch (MessagingException | IllegalStateException ex) {
+			ex.printStackTrace();
+			System.out.println("message: Gửi mail thất bại");
+		}
+		sender.send(message);
+		System.out.println("message: Gửi mail thành công");
+	}
+	
+	public static String maskEmail(String email) {
+        StringBuilder maskedEmailBuilder = new StringBuilder(email);
+        int atIndex = email.indexOf("@");
+        
+        if (atIndex >= 3) {
+            for (int i = 3; i < atIndex; i++) {
+                maskedEmailBuilder.setCharAt(i, '*');
+            }
+        }
+        
+        return maskedEmailBuilder.toString();
+    }
+	
+	public static String generateOTP(int length) {
+        Random random = new Random();
+        StringBuilder otpBuilder = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int digit = random.nextInt(10); // Tạo số ngẫu nhiên từ 0 đến 9
+            otpBuilder.append(digit); // Thêm số vào chuỗi OTP
+        }
+        System.out.println(otpBuilder.toString());
+        return otpBuilder.toString();
+    }
 }
