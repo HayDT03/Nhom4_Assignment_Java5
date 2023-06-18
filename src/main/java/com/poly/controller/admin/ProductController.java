@@ -36,9 +36,18 @@ public class ProductController {
 	
 	// create
 	@GetMapping("/admin/manage/product/save")
-	public String create(Model model, @ModelAttribute("product") Product entity) {
+	public String create(Model model, @ModelAttribute("product") Product entity,
+			@RequestParam("p") Optional<Integer> p) {
+		Pageable pageable;
+		try {
+			pageable = PageRequest.of(p.orElse(0), 5);
+		} catch (Exception e) {
+			pageable = PageRequest.of(0, 5);
+		}
+		Page<Product> list = dao.findAll(pageable);
 		dao.saveAndFlush(entity);
 		String link = "manage/product";
+		model.addAttribute("list", list);
 		model.addAttribute("url", link);
 		model.addAttribute("tittle", "Trang quản lý sản phẩm");
 		return "admin/index";

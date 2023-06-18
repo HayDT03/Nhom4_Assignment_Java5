@@ -39,9 +39,9 @@
 					id="description" path="description" />
 			</div>
 			<div class="col-md-4">
-				<img src="/image/${product.image}" width="100%" />
 				<div class="form-group">
-					<form:input path="image" name="image" />
+					<img src="/image/${product.image}" width="100%" id="img">
+					<form:input type="file" id="imgInput" path="image" name="image" width="100%"/>
 				</div>
 			</div>
 			<div class="row col-md-12 ">
