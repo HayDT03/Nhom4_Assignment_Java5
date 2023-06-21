@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.dao.CartDAO;
+import com.poly.dao.CategoryDAO;
 import com.poly.dao.ProductDAO;
+import com.poly.entity.Category;
 import com.poly.entity.Product;
 import com.poly.service.SessionService;
 
@@ -34,6 +37,9 @@ public class ProductController {
 	@Autowired
 	SessionService session;
 	
+	@Autowired
+	CategoryDAO cdao;
+	
 	// create
 	@GetMapping("/admin/manage/product/save")
 	public String create(Model model, @ModelAttribute("product") Product entity,
@@ -45,6 +51,9 @@ public class ProductController {
 			pageable = PageRequest.of(0, 5);
 		}
 		Page<Product> list = dao.findAll(pageable);
+		entity.setLike(0);
+		Category cate = cdao.findById("3").get();
+		entity.setCategory(cate);
 		dao.saveAndFlush(entity);
 		String link = "manage/product";
 		model.addAttribute("list", list);
